@@ -1,0 +1,35 @@
+/* Обычный */
+@font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Archivo'),
+    url('./fonts/archivo-cufonfonts-webfont/Archivo-Regular.woff') format('woff')
+}
+
+/* Жирный */
+@font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Archivo'),
+    url('./fonts/archivo-cufonfonts-webfont/Archivo-Bold.woff') format('woff')
+}
+
+/* Курсив */
+@font-face {
+    font-family: 'Archivo';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Archivo'),
+    url('./fonts/archivo-cufonfonts-webfont/Archivo-Italic.woff') format('woff')
+}
+
+/* Жирный курсив */
+@font-face {
+    font-family: 'Crimson Text';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Crimson Text'),
+    url('./fonts/archivo-cufonfonts-webfont/Archivo-BoldItalic.woff') format('woff')
+}
