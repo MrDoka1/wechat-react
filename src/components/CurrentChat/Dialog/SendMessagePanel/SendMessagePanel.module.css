@@ -1,0 +1,76 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    align-items: end;
+    transition: all 0.9s;
+    margin-top: 15px;
+    position: relative;
+}
+
+.wrapper::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    height: 10px;
+    width: 100%;
+    background-color: #2e333d;
+}
+
+.textarea {
+    background-color: #414149;
+    /*background-color: #343142;*/
+    vertical-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.input {
+    all: unset;
+    margin: auto;
+    background-color: #414149;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-y: auto;
+}
+
+.button {
+    height: 55px;
+    width: 55px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: rebeccapurple;
+    padding: 2px 3px 2px 5px;
+}
+
+.button:hover {
+    background-color: #7e49b9;
+}
+
+.input {
+    scrollbar-width: thin;
+    scrollbar-color: #7D7D7D #B8C0C2;
+}
+
+/* Chrome, Edge and Safari */
+.input::-webkit-scrollbar {
+    width: 4px;
+}
+.input::-webkit-scrollbar-track {
+    border-radius: 1px;
+    background-color: transparent;
+}
+
+.input::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #7D7D7D;
+}
+
+.input::-webkit-scrollbar-thumb:hover {
+    background-color: #7D7D7D;
+}
+
+.input::-webkit-scrollbar-thumb:active {
+    background-color: #7D7D7D;
+}

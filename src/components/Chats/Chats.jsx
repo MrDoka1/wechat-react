@@ -1,10 +1,14 @@
 import React from 'react';
-import styles from "./Chats.module.css" 
+import ChatItem from "./ChatItem/ChatItem";
+// import styles from "./Chats.module.css"
 
-const Chats = (props) => {
+const Chats = ({chats}) => {
+    let chatsArray = [];
+    chats.forEach((chat, key) => chatsArray.push(chat));
+
     return (
-        <div className="Chats">
-            
+        <div >
+            {chatsArray.map(chat => <ChatItem key={chat.id} chat={chat}/>)}
         </div>
     );
 };

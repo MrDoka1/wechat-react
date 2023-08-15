@@ -1,0 +1,22 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.leftColumn {
+    padding-left: 10px;
+}
+
+.chatName {
+    font-size: 20px;
+}
+
+.onlineStatus {
+    margin-top: 3px;
+    font-size: 14px;
+    color: grey;
+}
+
+.onlineStatus.active {
+    color: cornflowerblue;
+}

@@ -1,0 +1,47 @@
+.wrapper {
+    /*background-color: #414149;*/
+    margin: 0 10px 2px;
+    padding: 10px;
+    border-radius: 15px;
+    transition: 0.4s;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}
+
+.wrapper:hover {
+    background-color: #414149;
+}
+
+.active > .wrapper {
+    background-color: rebeccapurple;
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.chatInfo {
+
+}
+
+.chatName {
+    color: #fff;
+    width: calc((100vw - 90px) / 4 - 120px);
+    font-family: Archivo, sans-serif;
+    grid-area: chatName;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lastMessage {
+    color: #6e6e7a;
+    width: calc((100vw - 90px) / 4 - 120px);
+    font-family: Archivo, sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

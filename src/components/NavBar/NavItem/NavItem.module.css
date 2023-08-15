@@ -1,0 +1,28 @@
+.wrapper {
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.wrapper > svg {
+    width: 40px;
+    height: 40px;
+}
+
+.wrapper > svg > path {
+    fill: #a9a9a9;
+}
+.text {
+    color: #a9a9a9;
+}
+
+.active > div > span {
+    color: #fff;
+    /*#9a680e*/
+}
+
+.active > div > svg > path {
+    fill: #fff;
+}

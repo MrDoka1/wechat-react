@@ -1,0 +1,15 @@
+.wrapper {
+    grid-area: c;
+    max-width: 60%;
+    word-break: normal;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.forMe {
+    margin: 5px 40% 5px 0;
+}
+
+.forThem {
+    margin: 5px 0 5px 40%;
+}
