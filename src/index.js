@@ -4,6 +4,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import ChatsStorage from "./storage/ChatsStorage";
 import AuthorizationStorage from "./storage/AuthorizationStorage";
+import {UserStorage} from "./storage/UserStorage";
 
 export const Context = createContext(null);
 
@@ -14,8 +15,9 @@ root.render(
     <BrowserRouter>
         <Context.Provider value={
             {
-                chats: new ChatsStorage(),
+                chatsStorage: new ChatsStorage(),
                 authorizationStorage: new AuthorizationStorage(),
+                usersStorage: new UserStorage(),
             }
         }>
             <App />

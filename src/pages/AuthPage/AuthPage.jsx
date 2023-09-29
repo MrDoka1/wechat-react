@@ -1,9 +1,10 @@
 import React, {useMemo, useState} from 'react';
 import styles from "./AuthPage.module.css";
 import {checkAuthAPI, registrationAPI} from "../../ServerAPI/userAPI";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
-const AuthPage = ({code}) => {
+const AuthPage = (props) => {
+    const {code} = useParams();
     const [password, setPassword] = useState("");
     const [copyPassword, setCopyPassword] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -19,6 +20,7 @@ const AuthPage = ({code}) => {
     useMemo(() => {
         try {
             checkAuthAPI(code).then(data => {
+                console.log(data)
                 if (!data) {
                     window.location = "/auth"
                 }

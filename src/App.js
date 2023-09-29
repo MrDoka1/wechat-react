@@ -10,24 +10,37 @@ import PreloadPage from "./pages/PreloadPage/PreloadPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import FriendsPage from "./pages/FriendsPage/FriendsPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
-import AuthLogic from "./pages/AuthPage/AuthLogic";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import PreAuthPage from "./pages/AuthPage/PreAuthPage";
+import chatsStorage from "./storage/ChatsStorage";
+import ArtaPage from "./pages/ArtaPage/ArtaPage";
+import MathPage from "./pages/MathPage/MathPage";
 
 const App = observer((props) => {
     const {authorizationStorage} = useContext(Context);
-    console.log(authorizationStorage.authorization)
+    const {chatsStorage} = useContext(Context);
 
     if (authorizationStorage.authorization == null) {
         return (
-            <PreloadPage />
+            <div>
+                <Routes>
+                    <Route path="/arta" element={<ArtaPage />}/>
+                    <Route path="/math" element={<MathPage />}/>
+                    <Route path="*" element={<PreloadPage />} />
+                </Routes>
+            </div>
         )
     } else if (authorizationStorage.authorization) {
+        chatsStorage.searchUsers(authorizationStorage.id);
         return (
             <div>
                 <Routes>
-                    <Route path="/profile/*" element={<ProfilePage />}/>
-                    <Route path="/chats/*" element={<ChatsPage />}/>
+                    <Route path="/profile/:id" element={<ProfilePage />}/>
+                    <Route path="/chats/:id?" element={<ChatsPage />}/>
                     <Route path="/friends/*" element={<FriendsPage />}/>
                     <Route path="/setting/*" element={<SettingPage />}/>
+                    <Route path="/arta" element={<ArtaPage />}/>
+                    <Route path="/math" element={<MathPage />}/>
                     {/*<Route component={NoMatch} />*/}
                 </Routes>
             </div>
@@ -35,12 +48,14 @@ const App = observer((props) => {
 
     } else {
         let path = window.location.pathname;
-        console.log(path)
         return (
             <div>
                 <Routes>
                     <Route path="/login" element={<LoginPage path={"/profile"} />}/>
-                    <Route path="/auth" element={<AuthLogic />}/>
+                    <Route path="/auth/:code" element={<AuthPage />}/>
+                    <Route path="/auth" element={<PreAuthPage />}/>
+                    <Route path="/arta" element={<ArtaPage />}/>
+                    <Route path="/math" element={<MathPage />}/>
                     <Route path="*" element={<LoginPage path={path}/>}/>
                 </Routes>
             </div>

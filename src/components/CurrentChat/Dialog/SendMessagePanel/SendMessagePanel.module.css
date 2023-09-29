@@ -14,12 +14,12 @@
     left: 0;
     height: 10px;
     width: 100%;
-    background-color: #2e333d;
+    background-color: transparent;
 }
 
 .textarea {
-    background-color: #414149;
-    /*background-color: #343142;*/
+    /*background-color: #414149;*/
+    background-color: #343142;
     vertical-align: center;
     padding: 10px;
     border-radius: 10px;
@@ -29,7 +29,8 @@
 .input {
     all: unset;
     margin: auto;
-    background-color: #414149;
+    /*background-color: #414149;*/
+    background-color: #343142;
     width: 100%;
     word-wrap: break-word;
     overflow-y: auto;
@@ -51,6 +52,15 @@
 .input {
     scrollbar-width: thin;
     scrollbar-color: #7D7D7D #B8C0C2;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        grid-template-columns: 1fr 50px;
+    }
+    .button {
+        margin-left: 10px;
+    }
 }
 
 /* Chrome, Edge and Safari */

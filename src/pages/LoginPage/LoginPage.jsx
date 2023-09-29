@@ -6,6 +6,7 @@ import {loginAPI} from "../../ServerAPI/userAPI";
 import {Link} from "react-router-dom";
 
 const LoginPage = observer(({path}) => {
+    window.history.pushState('', '', '/login');
     let styleBodyError = "";
     let styleLoginError = "";
     let stylePasswordError = "";
@@ -17,7 +18,7 @@ const LoginPage = observer(({path}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    function clickSendButton(e) {
+    async function clickSendButton(e) {
         e.preventDefault();
         let check = true;
         /*if (login.includes(" ") || login.length < 8) {
@@ -29,23 +30,20 @@ const LoginPage = observer(({path}) => {
             check = false;
         }*/
         if (check) {
-            let formData = new FormData()
-            formData.append("username", login);
-            formData.append("password", password)
             try {
-                loginAPI(formData).then(data => {
-                    console.log(data);
-                    if (data === "OK") {
-                        authorizationStorage.updateAuthorization();
-                        window.location.pathname = path;
-                    } else if (data === "Authentication failure") {
-                        setErrorBody(true)
-                    } else {
-                        alert("Unknown server error");
-                    }
-                });
+                let formData = new FormData()
+                formData.append("username", login);
+                formData.append("password", password)
+
+                await loginAPI(formData)
+                authorizationStorage.updateAuthorization(path).then(r => {});
+
             } catch (e) {
-                console.log(e);
+                if (e.response.status === 501) {
+                    setErrorBody(true);
+                } else {
+                    alert("Unknown server error");
+                }
             }
         }
     }

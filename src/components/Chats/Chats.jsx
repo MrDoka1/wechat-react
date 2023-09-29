@@ -1,16 +1,23 @@
 import React from 'react';
 import ChatItem from "./ChatItem/ChatItem";
-// import styles from "./Chats.module.css"
+import {observer} from "mobx-react-lite";
 
-const Chats = ({chats}) => {
+const Chats = observer(({chats}) => {
+    console.log(chats)
+
     let chatsArray = [];
-    chats.forEach((chat, key) => chatsArray.push(chat));
+    let idArray = [];
+
+    chats.forEach((chat, key) => {
+        chatsArray.push(chat);
+        idArray.push(key)
+    });
 
     return (
         <div >
-            {chatsArray.map(chat => <ChatItem key={chat.id} chat={chat}/>)}
+            {chatsArray.map((chat, key) => <ChatItem key={key} id={idArray[key]} chat={chat}/>)}
         </div>
     );
-};
+});
 
 export default Chats;

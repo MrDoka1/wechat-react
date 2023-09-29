@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from "./NavItem.module.css"
 import {NavLink} from "react-router-dom";
 
-const NavItem = (props) => {
+const NavItem = ({end, to, svg, text}) => {
     return (
-        <NavLink className={({ isActive}) => isActive ? `${styles.active}` : ""} to={props.to}>
+        <NavLink end={end} className={({ isActive}) => isActive ? `${styles.active}` : ""} to={to}>
             <div className={styles.wrapper}>
-                {props.svg}
-                <span className={styles.text}>{props.text}</span>
+                {svg}
+                <span className={styles.text}>{text}</span>
             </div>
         </NavLink>
     );

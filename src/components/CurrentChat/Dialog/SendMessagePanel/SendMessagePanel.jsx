@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from "./SendMessagePanel.module.css"
+import {Context} from "../../../../index";
 
 let svgButton = (<svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9.11933 4.38421C6.32524 2.98547 3.22434 5.63695 4.17515 8.61184L5.26247 12.0138L4.18106 15.3845C3.22719 18.3576 6.32366 21.0124 9.11924 19.6182L18.0461 15.1663C20.6491 13.8682 20.6519 10.1575 18.0509 8.85543L9.11933 4.38421Z" fill="#fff"/>
@@ -10,7 +11,10 @@ let currentId = 0;
 let draftMessages = new Map();
 
 const SendMessagePanel = ({chatId}) => {
+    const {authorizationStorage, chatsStorage} = useContext(Context);
     const [value, setValue] = useState("");
+
+    // ***** Сохранение текста ввода в разных чатах *****
     if (currentId !== chatId) {
         if (draftMessages.get(chatId) !== undefined) {
             setValue(draftMessages.get(chatId));
@@ -21,6 +25,7 @@ const SendMessagePanel = ({chatId}) => {
         draftMessages.set(chatId, value);
     }
     currentId = chatId;
+    // ****************************************************
 
     function onKeyDown(event) {
         if (event.keyCode === 13){
@@ -60,8 +65,9 @@ const SendMessagePanel = ({chatId}) => {
         }
         if (message !== "") {
             console.log(message);
+            chatsStorage.setMessages(chatId, [{id:1, text:message, senderId:authorizationStorage.id, time: (Date.now())}])
         }
-        setTimeout(() => setValue(""), 1)
+        setTimeout(() => setValue(""), 1);
     }
 };
 

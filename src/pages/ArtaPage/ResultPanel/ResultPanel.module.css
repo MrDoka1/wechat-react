@@ -1,0 +1,7 @@
+.wrapper {
+    transition: all 1s;
+}
+
+.title {
+    font-size: 24px;
+}

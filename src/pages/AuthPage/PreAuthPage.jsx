@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import styles from "./AuthPage.module.css"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {preAuthAPI} from "../../ServerAPI/userAPI";
 
 const PreAuthPage = (props) => {
-    let styleLoginError = "";
+    const navigate = useNavigate();
     const [errorLogin, setErrorLogin] = useState(false);
     const [login, setLogin] = useState("");
+
+    let styleLoginError = "";
     const clickSendButton = (e) => {
         e.preventDefault();
         if (login.includes(" ") || login.length < 8) {
@@ -18,7 +20,7 @@ const PreAuthPage = (props) => {
                 preAuthAPI(formData).then(data => {
                     if (data.success === "true") {
                         let code = data.code;
-                        window.location = "/auth?e=" + code;
+                        navigate("/auth/" + code)
                     }
                 });
             } catch (e) {

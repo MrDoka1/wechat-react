@@ -1,0 +1,25 @@
+$charade: #282a37;
+$bluebell: #979fd0;
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut {
+    width: 2rem;
+    height: 2rem;
+    margin: 2rem;
+    border-radius: 50%;
+    border: 0.3rem solid rgba($bluebell, 0.3);
+    border-top-color: $bluebell;
+    animation: 1s spin infinite linear;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

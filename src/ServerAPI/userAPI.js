@@ -23,3 +23,18 @@ export const checkAuthorizationAPI = async () => {
     const {data} = await $HOST.get("/check/authorization");
     return data;
 }
+
+export const getUserAPI = async (id) => {
+    const {data} = await $HOST.get("/user", {params: {id: id}});
+    return data;
+}
+
+export const getUsersAPI = async (ids) => {
+    const {data} = await $HOST.get("/users", {params: {ids: ids}});
+    return data;
+}
+
+export const getProfileAPI = async (id) => {
+    const {data} = await $HOST.get("/profile", {params: {id: id}});
+    return data;
+}

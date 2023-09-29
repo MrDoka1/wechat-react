@@ -1,14 +1,16 @@
 import React from 'react';
 import PreAuthPage from "./PreAuthPage";
 import AuthPage from "./AuthPage";
+import {useParams} from "react-router-dom";
 
 const AuthLogic = (props) => {
-    let param = window.location.search.substring(3);
+    let e = useParams();
+    console.log(e)
 
-    if (param.length === 0) {
+    if (e.length === 0) {
         return <PreAuthPage />
     }
-    return <AuthPage code={param}/>
+    return <AuthPage code={e}/>
 };
 
 export default AuthLogic;

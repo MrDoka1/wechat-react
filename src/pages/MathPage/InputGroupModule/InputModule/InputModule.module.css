@@ -1,0 +1,27 @@
+.wrapper {
+
+}
+
+.title {
+    font-size: 24px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+.inp {
+    all: unset;
+    background-color: #161617;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.select {
+    background-color: #161617;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+}

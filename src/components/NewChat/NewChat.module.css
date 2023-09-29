@@ -1,0 +1,17 @@
+.wrapper {
+    background-color: #414149;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+}
+
+.wrapper:hover {
+    background-color: #35353a;
+}
+
+.wrapper:active {
+    background-color: #262628;
+}

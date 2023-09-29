@@ -1,6 +1,14 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 10px 1fr 1fr;
+}
+
+.wrapper::before {
+    margin: auto;
+    content: "";
+    width: 2px;
+    height: 70%;
+    background-color: grey;
 }
 
 .leftColumn {
@@ -8,6 +16,7 @@
 }
 
 .chatName {
+    color: #fff;
     font-size: 20px;
 }
 
@@ -19,4 +28,15 @@
 
 .onlineStatus.active {
     color: cornflowerblue;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .wrapper::before {
+        display: none;
+    }
+
 }

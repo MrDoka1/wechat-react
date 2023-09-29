@@ -11,22 +11,43 @@ export default class AuthorizationStorage {
             _setAuthorization: action,
             _setId: action,
         })
-        this.updateAuthorization();
+        this.updateAuthorization("");
     }
 
-    updateAuthorization() {
-        checkAuthorizationAPI().then(data => {
+    async updateAuthorization(path) {
+        /*checkAuthorizationAPI().then(data => {
             this._setAuthorization(data.authorization);
-            if (this._authorization) {
+            if (data.authorization) {
                 this._setId(data.id);
+                if (path === "/profile") {
+                    window.location.pathname = "/profile/" + data.id;
+                }
             } else {
                 this._setId(null);
             }
-        });
+        });*/
+        try {
+            const data = await checkAuthorizationAPI();
+            if (data.authorization) {
+                this._setId(data.id);
+                this._setAuthorization(true);
+                if (path === "/profile") {
+                    window.location.pathname = "/profile/" + data.id;
+                }
+            } else {
+                this._setId(null);
+                this._setAuthorization(false);
+            }
+        } catch (e) {
+            if (e.code === "ERR_NETWORK") {
+                await this.updateAuthorization(path);
+            }
+        }
+
     }
 
     _setAuthorization(authorization) {
-        this._authorization = (authorization === "true");
+        this._authorization = (authorization);
     }
 
     _setId(id) {

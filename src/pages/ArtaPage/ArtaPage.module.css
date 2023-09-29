@@ -1,0 +1,28 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.math {
+    height: 100dvh;
+}
+
+.wrapper > div {
+    background-color: #2e333d;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: max-content;
+    padding: 20px;
+    margin-bottom: 10px;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}

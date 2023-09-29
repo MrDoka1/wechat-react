@@ -1,0 +1,30 @@
+.wrapper {
+    background-color: #161617;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-flex;
+    min-width: 40px;
+    margin-top: 7px;
+    position: relative;
+    transition: all 1s ;
+}
+
+.text {
+    position: absolute;
+}
+
+.text:after {
+    content: "";
+    left: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 2px;
+    height: 70%;
+    background-color: grey;
+    border-radius: 1px;
+}
+
+.value {
+    margin-left: 70px;
+}

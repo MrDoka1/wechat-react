@@ -9,3 +9,19 @@
     margin-bottom: 80px;
 }
 
+@media (max-width: 510px) {
+    .wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: none;
+    }
+}
+
+@media (max-height: 480px) {
+    .logo {
+        display: none;
+    }
+}

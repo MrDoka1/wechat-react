@@ -2,7 +2,7 @@
     background-color: #2e333d;
     display: block;
 
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     align-content: center;
     vertical-align: center;
@@ -12,6 +12,40 @@
 .text {
     padding-top: 40vh;
     text-align: center;
-    font-size: 40px;
+    font-size: 60px;
     color: #fff;
+}
+
+.dots > span {
+    position: relative;
+    bottom: 0px;
+    -webkit-animation: jump 1500ms infinite;
+    animation: jump 2s infinite;
+}
+
+.dots > span:first-child {
+    --webkit-animation-delay: 200ms;
+    animation-delay: 200ms;
+}
+
+.dots > span:nth-child(2) {
+    --webkit-animation-delay: 400ms;
+    animation-delay: 400ms;
+}
+
+.dots > span:last-child {
+    --webkit-animation-delay: 600ms;
+    animation-delay: 600ms;
+}
+
+@-webkit-keyframes jump {
+    0%   {bottom: 0px;}
+    20%  {bottom: 8px;}
+    40%  {bottom: 0px;}
+}
+
+@keyframes jump {
+    0%   {bottom: 0px;}
+    20%  {bottom: 8px;}
+    40%  {bottom: 0px;}
 }

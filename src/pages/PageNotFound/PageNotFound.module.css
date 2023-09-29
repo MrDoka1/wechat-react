@@ -1,0 +1,22 @@
+.wrapper {
+    height: 100dvh;
+    width: 100dvw;
+    background-color: #191e45;
+    display: flex;
+    align-content: center;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.wrapper > * {
+    margin: auto;
+}
+
+.text {
+    text-align: center;
+    font-size: 70px;
+    display: block;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    color: #000;
+}
