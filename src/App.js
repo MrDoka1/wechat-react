@@ -12,7 +12,6 @@ import FriendsPage from "./pages/FriendsPage/FriendsPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import PreAuthPage from "./pages/AuthPage/PreAuthPage";
-import chatsStorage from "./storage/ChatsStorage";
 import ArtaPage from "./pages/ArtaPage/ArtaPage";
 import MathPage from "./pages/MathPage/MathPage";
 
