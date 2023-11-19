@@ -6,17 +6,17 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
 
 const Dialog = observer(({chatId}) => {
-    const {chatsStorage} = useContext(Context);
+    const {storage} = useContext(Context);
 
-    let messages = chatsStorage.getMessages(chatId.toString());
-    let isDialod = chatsStorage.getChat(chatId).isDialog;
+    let messages = storage.getMessages(chatId.toString());
+    let isDialog = storage.getChat(chatId).isDialog;
     messages = [...messages.entries()].sort()
     let messagesArray = [...messages]
 
     return (
         <div className={styles.wrapper}>
                 <div className={styles.messages}>
-                    {messagesArray.map((message, key) => <Message key={key} isDialog={isDialod} message={message}/>)}
+                    {messagesArray.map((message, key) => <Message key={key} isDialog={isDialog} message={message}/>)}
                 </div>
             <div>
                 <SendMessagePanel chatId={chatId} />

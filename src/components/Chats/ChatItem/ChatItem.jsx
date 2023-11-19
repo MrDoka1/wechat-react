@@ -5,17 +5,15 @@ import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
 
 const ChatItem = observer(({id, chat}) => {
-    const {chatsStorage} = useContext(Context);
-    console.log(id)
-    console.log(chatsStorage)
+    const {storage} = useContext(Context);
 
     let to = "/chats/" + id;
 
-    let lastMessage = chatsStorage.getLastMessage(id);
+    let lastMessage = storage.getLastMessage(id);
     lastMessage = lastMessage !== null ? lastMessage.text : "";
 
     if (id.toString().charAt(0) !== 'c') {
-        let user = chatsStorage.getUser(chat.userId);
+        let user = storage.getUser(chat.userId);
         let avatarText = user.firstname.charAt(0).concat(user.lastname.charAt(0));
 
         return (

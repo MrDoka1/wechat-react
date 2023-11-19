@@ -1,0 +1,41 @@
+.wrapper {
+    width: 100%;
+    background-color: #312f2f;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 48px 1fr 50px;
+    font-family: Archivo, sans-serif;
+    box-sizing: border-box;
+}
+
+.name {
+    font-size: 22px;
+    color: white;
+
+}
+
+.role {
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.role[content="creator"] {
+    color: #0c2ce3;
+}
+
+.role[content="admin"] {
+    color: #c41b1b;
+}
+
+.role[content="moderator"] {
+    color: #20e50b;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+

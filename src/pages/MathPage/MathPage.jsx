@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import styles from "../ArtaPage/ArtaPage.module.css"
+import styles from "../ArtaPage/ArtaPage.module.scss";
 import InputGroupModule from "./InputGroupModule/InputGroupModule";
 import InputModule from "./InputGroupModule/InputModule/InputModule";
 import moduleStyles from "./InputGroupModule/InputModule/InputModule.module.css";
@@ -57,7 +57,7 @@ const MathPage = (props) => {
         let i, sumX, check;
 
         if (functionX === "sin") {
-            console.log("sin: ", Math.sin(x))
+            console.log("sin: ", Math.sin(Number(inputX)))
             if (x < 0) {
                 x = -x;
                 znak = -1;

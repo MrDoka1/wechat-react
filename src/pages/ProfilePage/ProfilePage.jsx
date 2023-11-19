@@ -4,9 +4,10 @@ import {observer} from "mobx-react-lite";
 import {useParams} from "react-router-dom";
 import Profile from "./ProfileComponents/Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import LoadProfile from "./ProfileComponents/Profile/LoadProfile";
 
 const ProfilePage = observer((props) => {
-    const {authorizationStorage, usersStorage} = useContext(Context);
+    const {authorizationStorage, storage} = useContext(Context);
     let {id} = useParams();
     if (id === "0") {
         window.location.pathname = "/profile/" + authorizationStorage.id;
@@ -14,15 +15,15 @@ const ProfilePage = observer((props) => {
     id = Number(id);
 
 
-    if (usersStorage.hasUser(id)) {
-        if (usersStorage.getUser(id) === null) {
+    if (storage.hasUser(id)) {
+        if (storage.getUser(id) === null) {
             // возврат неизвестного аользователя
             return <PageNotFound />;
         }
     } else {
-        usersStorage.searchUsers(id);
+        storage.searchUsers(id);
         // возврат грузящейся страницы
-        return ("12121212")
+        return <LoadProfile />
     }
 
 

@@ -10,8 +10,12 @@ let shiftTime = false;
 let currentId = 0;
 let draftMessages = new Map();
 
+// Удалить в релизе
+let tempId = 100000;
+// ----
+
 const SendMessagePanel = ({chatId}) => {
-    const {authorizationStorage, chatsStorage} = useContext(Context);
+    const {authorizationStorage, storage} = useContext(Context);
     const [value, setValue] = useState("");
 
     // ***** Сохранение текста ввода в разных чатах *****
@@ -64,8 +68,8 @@ const SendMessagePanel = ({chatId}) => {
             message = message.substring(0, message.length-1);
         }
         if (message !== "") {
-            console.log(message);
-            chatsStorage.setMessages(chatId, [{id:1, text:message, senderId:authorizationStorage.id, time: (Date.now())}])
+            console.log(chatId);
+            storage.addMessage(chatId, {id:tempId++, text:message, senderId:authorizationStorage.id, time: "2023-08-27T15:37:47.58976"})
         }
         setTimeout(() => setValue(""), 1);
     }

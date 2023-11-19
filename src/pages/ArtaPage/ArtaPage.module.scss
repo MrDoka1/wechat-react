@@ -13,6 +13,25 @@
     height: 100dvh;
 }
 
+.button {
+    background-color: #161617;
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #212123;
+        color: #979fd0;
+    }
+
+    &:active {
+        background-color: #2a2a2d;
+        color: #7781d7;
+    }
+}
+
+/*
 .wrapper > div {
     background-color: #2e333d;
     border-radius: 15px;
@@ -25,4 +44,4 @@
     justify-content: center;
     flex-direction: column;
     color: white;
-}
+}*/

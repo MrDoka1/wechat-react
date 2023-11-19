@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "./ArtaPage.module.css"
+import styles from "./ArtaPage.module.scss"
 import GroupCoordinates from "./GroupCoordinates/GroupCoordinates";
 import ResultPanel from "./ResultPanel/ResultPanel";
 import Graphic from "./Graphic/Graphic";

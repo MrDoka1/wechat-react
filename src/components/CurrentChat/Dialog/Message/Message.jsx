@@ -4,18 +4,18 @@ import {Context} from "../../../../index";
 import {Link} from "react-router-dom";
 
 const Message = ({isDialog, message}) => {
-    const {authorizationStorage, chatsStorage} = useContext(Context);
+    const {authorizationStorage, storage} = useContext(Context);
     const {usersStorage} = useContext(Context);
 
     message = message[1]
 
     let iSender = message.senderId === authorizationStorage.id;
     let forWho = iSender ? styles.forThem : styles.forMe;
-    let name = isDialog ? "" : (iSender ? "" : chatsStorage.getUser(message.senderId).firstname);
+    let name = isDialog ? "" : (iSender ? "" : storage.getUser(message.senderId).firstname);
 
     let lineName = "";
     if (name !== "") {
-        let user = chatsStorage.getUser(message.senderId);
+        let user = storage.getUser(message.senderId);
         let to = "/profile/" + user.id; // -------------------------------- Поменять на ник
         lineName = <Link to={to} style={{color: user.color}}><b>{name}</b></Link>;
     }

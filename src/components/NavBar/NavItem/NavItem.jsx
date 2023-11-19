@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import styles from "./NavItem.module.css"
+import React from 'react';
+import styles from "./NavItem.module.scss"
 import {NavLink} from "react-router-dom";
 
 const NavItem = ({end, to, svg, text}) => {

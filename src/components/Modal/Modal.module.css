@@ -25,8 +25,24 @@
     background-color: #201F20;
     transform: scale(0.5);
     transition: 0.4s all;
+    box-sizing: border-box;
 }
 
 .content.active {
     transform: scale(1);
+}
+
+.closeButton{
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    position: absolute;
+    right: 20px;
+    border-radius: 50%;
+    background-color: #3d3d3d;
+    transition: 0.2s;
+}
+
+.closeButton:hover {
+    background-color: #565656;
 }

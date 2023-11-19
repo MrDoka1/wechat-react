@@ -56,6 +56,14 @@ input {
     border: none;
 }
 
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 html {
     height: 100dvh;
 }
@@ -73,7 +81,10 @@ html {
     height: 100dvh;
 }
 
-@media (max-width: 510px) {
+
+$mobileWidth: 510px;
+
+@media (max-width: $mobileWidth) {
     .page {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 45px;

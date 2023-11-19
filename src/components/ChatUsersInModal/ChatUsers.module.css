@@ -1,0 +1,53 @@
+.wrapper {
+    width: 400px;
+}
+
+@media (max-width: 440px) {
+    .wrapper {
+        width: calc(100vw - 40px);
+    }
+}
+
+.users {
+    display: block;
+    position: relative;
+    height: calc(100dvh - 200px);
+    overflow-y: scroll;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: grey;
+    text-align: center;
+}
+
+.chatName {
+    text-align: center;
+    font-size: 20px;
+}
+
+.search {
+    padding: 2px !important;
+}
+
+.users::-webkit-scrollbar {
+    width: 4px;
+}
+.users::-webkit-scrollbar-track {
+    border-radius: 1px;
+    background-color: transparent;
+}
+
+.users::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: transparent;
+    transition: 1s all;
+}
+
+.users::-webkit-scrollbar-thumb:hover {
+    background-color: #7D7D7D;
+}
+
+.users::-webkit-scrollbar-thumb:active {
+    background-color: #7D7D7D;
+}

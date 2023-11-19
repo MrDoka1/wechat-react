@@ -3,8 +3,6 @@ import ChatItem from "./ChatItem/ChatItem";
 import {observer} from "mobx-react-lite";
 
 const Chats = observer(({chats}) => {
-    console.log(chats)
-
     let chatsArray = [];
     let idArray = [];
 

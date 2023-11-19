@@ -1,3 +1,5 @@
+$newChatWidth: 500px;
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -13,7 +15,7 @@
     -ms-flex-align: center;
 }
 
-@media (min-width: 400px) and (max-width: 600px) {
+@media (min-width: 400px) and (max-width: 640px) {
     .wrapper {
         width: calc(100dvw - 40px);
         padding: 20px calc((100dvw - 400px)/2);
@@ -39,6 +41,11 @@
     align-items: center;
     color: #FFF;
     margin-bottom: 40px;
+
+    @media (max-width: $newChatWidth) {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
 }
 
 .input {
@@ -50,13 +57,25 @@
     color: #fff;
     padding: 16px 25px;
     font-size: 16px;
+
+    @media (max-width: $newChatWidth) {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
 }
 
 .switch_line {
     display: flex;
     margin-top: 15px;
+    margin-bottom: 15px;
     vertical-align: center;
     align-items: center;
+
+    @media (max-width: $newChatWidth) {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
 }
 
 .switch {
@@ -97,5 +116,12 @@
 .switch:checked + .label:after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
+}
+
+.search {
+    margin: 0 0 15px;
+    @media (max-width: $newChatWidth) {
+        margin: 0 0 10px;
+    }
 }
 

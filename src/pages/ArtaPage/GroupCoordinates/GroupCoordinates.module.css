@@ -1,5 +1,16 @@
 .wrapper {
-
+    position: relative;
+    background-color: #2e333d;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: max-content;
+    padding: 20px;
+    margin: 5px;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
 }
 
 .title {

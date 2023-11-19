@@ -1,0 +1,147 @@
+$profileSize: 200px;
+.wrapper {
+    /*background-color: #191e45;*/
+    background-color: #1e1b2e;
+    border-radius: 20px;
+    padding: 20px 20px 20px;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: 230px 1fr;
+
+    & > .block {
+        background-color: #191e45;
+        padding: 10px;
+        border-radius: 20px;
+
+        &.name {
+            background-color: #233c8f;
+        }
+    }
+}
+
+.name {
+    font-size: 24px;
+    height: 40px;
+    width: max-content;
+}
+
+.onlineStatus {
+    font-size: 15px;
+    color: #cbe957;
+
+    &.active {
+        font-weight: 600;
+        color: #7e49b9;
+    }
+}
+
+.avatar {
+    height: $profileSize;
+    width: $profileSize;
+
+    & > img {
+        border-radius: 20px;
+        position: absolute;
+        height: $profileSize;
+        width: $profileSize;
+    }
+}
+
+.svg {
+    position: absolute;
+}
+
+img:not([src]) {
+    font-size: 0;
+    width: 0;
+    height: 0;
+}
+
+.blockInfo {
+    box-sizing: border-box;
+    height: $profileSize + 20px;
+    padding: 20px !important;
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(#233c8f, #000);
+    display: block;
+    position: relative;
+
+    & > div {
+        display: flex;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    & > .actionBar {
+        width: calc(100% - 40px);
+    }
+}
+
+.line {
+    padding: 0 !important;
+    height: 2px;
+    max-width: 204px;
+    border-radius: 1px;
+    background-color: #233c8f;
+}
+
+.infoPrefix {
+    color: #7D7D7D;
+    padding-right: 5px;
+}
+
+.actionBar {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+
+    & > * {
+        font-size: 15px;
+        padding: 0 6px;
+        box-sizing: content-box;
+        border-radius: 11px;
+        border: 2px #fff solid;
+        color: #fff;
+        font-weight: 500;
+        transition: 0.1s all;
+
+        &:not(:last-child) {
+            margin-right: 5px;
+        }
+
+        @media(hover:hover){
+            &:hover{
+                background-color: #fff;
+                color: #000;
+                border-color: #c68dfe;
+            }
+        }
+
+        &:active {
+            background-color: #fff;
+            color: #000;
+            border-color: #cbe957;
+        }
+    }
+}
+
+@media (max-width: 570px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > * {
+            margin-bottom: 10px;
+        }
+    }
+    .blockInfo {
+        max-width: 370px;
+        margin-bottom: 0;
+        order: 2;
+    }
+    .name {
+        order: 1;
+    }
+}

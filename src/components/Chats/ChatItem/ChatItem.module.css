@@ -28,6 +28,7 @@
 }
 
 .chatName {
+    font-size: 20px;
     color: #fff;
     width: calc((100vw - 90px) / 4 - 120px);
     font-family: Archivo, sans-serif;
@@ -35,13 +36,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: 4px;
 }
 
 .lastMessage {
-    color: #6e6e7a;
+    color: #939393;
     width: calc((100vw - 90px) / 4 - 120px);
     font-family: Archivo, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./InputModule.module.css"
 
-const InputModule = ({value, setValue, type = "number", title, subtitle, select}) => {
+const InputModule = ({value, setValue, type = "number", title, subtitle, select, disabled=false}) => {
     if (type === "select") {
         return (
             <div className={styles.wrapper}>
@@ -14,7 +14,7 @@ const InputModule = ({value, setValue, type = "number", title, subtitle, select}
     return (
         <div className={styles.wrapper}>
             <div className={styles.subtitle}>{subtitle}</div>
-            <input value={value} onChange={e => setValue(e.target.value)} className={styles.inp} type={type} />
+            <input disabled={disabled} value={value} onChange={e => setValue(e.target.value)} className={styles.inp} type={type} />
         </div>
     );
 };

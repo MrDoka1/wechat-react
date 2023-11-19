@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import styles from "./NavBar.module.css"
+import styles from "./NavBar.module.scss"
 import NavItem from "./NavItem/NavItem";
 import logo from "./logo.png"
 import {Context} from "../../index";

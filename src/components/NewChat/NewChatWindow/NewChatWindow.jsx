@@ -1,8 +1,24 @@
-import React, {useState} from 'react';
-import styles from "./NewChatWindow.module.css"
+import React, {useContext, useState} from 'react';
+import styles from "./NewChatWindow.module.scss"
+import Search from "../../Search/Search";
+import {Context} from "../../../index";
 
 const NewChatWindow = (props) => {
-    const [name, setName] = useState("")
+    const {authorizationStorage, storage} = useContext(Context);
+    const [name, setName] = useState("");
+    const [search, setSearch] = useState("");
+    const user = storage.getUser(authorizationStorage.id);
+
+    // Только когда подгрузились данные о пользователе
+    if (user !== undefined) {
+        const list = user.friendsIds;
+        console.log(storage)
+        let listUsers;
+        storage.getAndUpdateUsers(list).then(data => listUsers = data);
+        console.log(listUsers)
+    }
+
+
 
     return (
         <div className={styles.wrapper}>
@@ -15,6 +31,10 @@ const NewChatWindow = (props) => {
                 Private chat
             </div>
 
+            <Search className={styles.search} search={search} setSearch={setSearch}/>
+            <div>
+
+            </div>
         </div>
     );
 };

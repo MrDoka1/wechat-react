@@ -1,0 +1,27 @@
+$size: 45px;
+
+.wrapper {
+
+}
+
+.img {
+    width: $size;
+    height: $size;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.avatar {
+    position: relative;
+    width: $size;
+    height: $size;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar > p {
+    color: #fff;
+    font-size: 20px;
+}

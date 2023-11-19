@@ -30,11 +30,26 @@ export const getUserAPI = async (id) => {
 }
 
 export const getUsersAPI = async (ids) => {
+    ids = ids.toString();
     const {data} = await $HOST.get("/users", {params: {ids: ids}});
+    return data;
+}
+
+export const getUsersOnlineAPI = async (ids) => {
+    ids = ids.toString();
+    const {data} = await $HOST.get("/users/online", {params: {ids: ids}});
     return data;
 }
 
 export const getProfileAPI = async (id) => {
     const {data} = await $HOST.get("/profile", {params: {id: id}});
+    return data;
+}
+
+export const friendAPI = async (action, id) => {
+    let formData = new FormData();
+    formData.append("action", action);
+    formData.append("id", id);
+    const {data} = await $HOST.post("/friend", formData);
     return data;
 }

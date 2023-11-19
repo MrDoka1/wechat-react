@@ -19,3 +19,8 @@ export const getMessagesAPI = async (id, messageId) => {
     const {data} = await $HOST.get("/messages", {params: {id: id, messageId: messageId}});
     return data;
 }
+
+export const getChatUsersAPI = async (chatId) => {
+    const {data} = await $HOST.get("/chat/users", {params: {chatId: chatId}});
+    return data;
+}

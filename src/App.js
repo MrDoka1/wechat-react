@@ -1,9 +1,9 @@
 import {Route, Routes} from "react-router-dom";
 import ChatsPage from "./pages/ChatsPage/ChatsPage";
 import "./fonts.css";
-import "./styleReset.css"
+import "./styleReset.scss"
 import LoginPage from "./pages/LoginPage/LoginPage";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {Context} from "./index";
 import {observer} from "mobx-react-lite";
 import PreloadPage from "./pages/PreloadPage/PreloadPage";
@@ -14,10 +14,13 @@ import AuthPage from "./pages/AuthPage/AuthPage";
 import PreAuthPage from "./pages/AuthPage/PreAuthPage";
 import ArtaPage from "./pages/ArtaPage/ArtaPage";
 import MathPage from "./pages/MathPage/MathPage";
+import TwoPage from "./pages/TwoPage/TwoPage";
+import ExtrapolationPage from "./pages/ExtrapolationPage/ExtrapolationPage";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 const App = observer((props) => {
     const {authorizationStorage} = useContext(Context);
-    const {chatsStorage} = useContext(Context);
+    const {storage} = useContext(Context);
 
     if (authorizationStorage.authorization == null) {
         return (
@@ -25,22 +28,27 @@ const App = observer((props) => {
                 <Routes>
                     <Route path="/arta" element={<ArtaPage />}/>
                     <Route path="/math" element={<MathPage />}/>
+                    <Route path="/two" element={<TwoPage />}/>
+                    <Route path="/extra" element={<ExtrapolationPage />}/>
                     <Route path="*" element={<PreloadPage />} />
                 </Routes>
             </div>
         )
     } else if (authorizationStorage.authorization) {
-        chatsStorage.searchUsers(authorizationStorage.id);
+        storage.searchUsers(authorizationStorage.id);
         return (
             <div>
                 <Routes>
                     <Route path="/profile/:id" element={<ProfilePage />}/>
                     <Route path="/chats/:id?" element={<ChatsPage />}/>
-                    <Route path="/friends/*" element={<FriendsPage />}/>
+                    <Route path="/friends" element={<FriendsPage path="friends"/>}/>
+                    <Route path="/friends/subscribers" element={<FriendsPage path="subscribers"/>}/>
+                    <Route path="/friends/search" element={<FriendsPage path="search"/>}/>
                     <Route path="/setting/*" element={<SettingPage />}/>
                     <Route path="/arta" element={<ArtaPage />}/>
                     <Route path="/math" element={<MathPage />}/>
-                    {/*<Route component={NoMatch} />*/}
+                    <Route path="/two" element={<TwoPage />}/>
+                    <Route path="/login" component={<PageNotFound />} />
                 </Routes>
             </div>
         );
@@ -55,6 +63,7 @@ const App = observer((props) => {
                     <Route path="/auth" element={<PreAuthPage />}/>
                     <Route path="/arta" element={<ArtaPage />}/>
                     <Route path="/math" element={<MathPage />}/>
+                    <Route path="/two" element={<TwoPage />}/>
                     <Route path="*" element={<LoginPage path={path}/>}/>
                 </Routes>
             </div>

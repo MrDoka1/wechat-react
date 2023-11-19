@@ -27,7 +27,8 @@
     fill: #fff;
 }
 
-@media (max-width: 510px) {
+$mobileWidth: 510px;
+@media (max-width: $mobileWidth) {
     .wrapper {
         width: 30px;
         height: 30px;

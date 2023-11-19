@@ -1,0 +1,20 @@
+.wrapper {
+    padding: 4px;
+    border-radius: 15px;
+    border: #7e49b9 solid 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 5px;
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    @media (max-width: 600px) {
+        gap: 5px;
+    }
+
+    @media (max-height: 700px) {
+        margin-bottom: 10px;
+    }
+}

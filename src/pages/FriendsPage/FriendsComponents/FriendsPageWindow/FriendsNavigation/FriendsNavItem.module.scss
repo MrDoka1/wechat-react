@@ -1,0 +1,59 @@
+.active {
+    & > .wrapper > .text {
+        color: #cf1eff;
+    }
+}
+
+.wrapper {
+    background-color: #4f088c;
+    color: white;
+    font-size: 18px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    display: flex;
+    min-height:100%;
+    transition: 0.01s all;
+    box-sizing: border-box;
+
+    @media(hover:hover){
+        &:hover {
+            background-color: #6b0eb9;
+
+            & > .count {
+                background-color: #8e69af;
+            }
+        }
+    }
+
+    &:active {
+        background-color: #380564;
+
+        & > .count {
+            background-color: #6200b2;
+        }
+    }
+
+}
+
+.text {
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
+
+}
+
+.count {
+    margin-left: 4px;
+    padding: 1px 4px;
+    min-width: 12px;
+    height: 18px;
+    border-radius: 10px;
+    background-color: #7e49b9;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+        height: 14px;
+        min-width: 10px;
+    }
+}

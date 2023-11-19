@@ -9,11 +9,11 @@ import NavBar from "../../components/NavBar/NavBar";
 import {useMediaQuery} from "react-responsive";
 import NewChat from "../../components/NewChat/NewChat";
 import {observer} from "mobx-react-lite";
-import LoadChat from "../../components/CurrentChat/LoadChat/LoadChat";
+import LoaderElement from "../../components/CurrentChat/LoadChat/LoaderElement";
 
 let firstLoad = true;
 const ChatsPage = observer((props) => {
-    const {chatsStorage} = useContext(Context);
+    const {storage} = useContext(Context);
     const isSingleViewing = useMediaQuery({ query: `(max-width: 1000px)` });
     let {id} = useParams();
 
@@ -30,19 +30,19 @@ const ChatsPage = observer((props) => {
     useEffect(() => {
         if (firstLoad) {
             firstLoad = false;
-            chatsStorage.updateChats(setCheck);
+            storage.updateChats(setCheck);
         }
-    }, [chatsStorage, setCheck]);
+    }, [storage, setCheck]);
 
     const searchChats = useMemo(() => {
         if (search === "") {
-            return chatsStorage.chats;
+            return storage.chats;
         } else {
             let searchChats = new Map();
-            console.log(chatsStorage.chats)
-            chatsStorage.chats.forEach((chat, key) => {
+            console.log(storage.chats)
+            storage.chats.forEach((chat, key) => {
                 if (key.toString().charAt(0) !== 'c') {
-                    if (chatsStorage.getUser(chat.userId).getName().toLowerCase().includes(search.toLowerCase())) {
+                    if (storage.getUser(chat.userId).getName().toLowerCase().includes(search.toLowerCase())) {
                         searchChats.set(key, chat);
                     }
                 } else if (chat.name.toLowerCase().includes(search.toLowerCase())) {
@@ -51,19 +51,37 @@ const ChatsPage = observer((props) => {
             })
             return searchChats;
         }
-    }, [chatsStorage, search]);
+    }, [storage, search]);
 
     if (!check) {
-        return <LoadChat />
+        return (
+            <div className="page">
+                <NavBar />
+                <div className={styles.wrapper}>
+                    <div>
+                        <div className={styles.topBar}>
+                            <Search search={search} setSearch={setSearch} />
+                            <NewChat />
+                        </div>
+                        <LoaderElement />
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     // ***** Проверка на наличие чата *****
     let currentChat = "";
     if (id !== undefined && id.charAt(0) !== "c") {
         id = Number(id);
+        // Если диалога нет, то создадим локально
+        if (!storage.hasChat(id)) {
+            storage.addLocalDialog(id);
+        }
     }
-    console.log(chatsStorage.chats.has(id))
-    if (id !== undefined && chatsStorage.chats.has(id)) {
+
+
+    if (id !== undefined && storage.hasChat(id)) {
         currentChat = <CurrentChat chatId={id}/>;
         if (isSingleViewing) {
             return (
