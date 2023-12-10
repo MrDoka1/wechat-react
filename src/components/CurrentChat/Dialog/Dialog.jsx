@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import styles from "./Dialog.module.css"
 import SendMessagePanel from "./SendMessagePanel/SendMessagePanel";
 import Message from "./Message/Message";
@@ -9,9 +9,19 @@ const Dialog = observer(({chatId}) => {
     const {storage} = useContext(Context);
 
     let messages = storage.getMessages(chatId.toString());
-    let isDialog = storage.getChat(chatId).isDialog;
+    let isDialog = storage.isDialog(chatId);
     messages = [...messages.entries()].sort()
     let messagesArray = [...messages]
+    console.log(messagesArray)
+
+    // Для плавной прокрутки
+    const messagesEndRef = useRef(null)
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({
+            behavior: 'smooth'
+        })
+    }, [messages])
 
     return (
         <div className={styles.wrapper}>

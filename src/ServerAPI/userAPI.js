@@ -53,3 +53,24 @@ export const friendAPI = async (action, id) => {
     const {data} = await $HOST.post("/friend", formData);
     return data;
 }
+
+export const getMyFriendsListAPI = async () => {
+    const {data} = await $HOST.get("/friends");
+    return data;
+}
+
+export const getMySubscribersListAPI = async () => {
+    const {data} = await $HOST.get("/friends/subscribers");
+    return data;
+}
+
+export const getSearchUsersAPI = async () => {
+    const {data} = await $HOST.get("/friends/search");
+    return data;
+}
+
+export const getLogoutAPI = async () => {
+    const {data} = await $HOST.get("/logout");
+    return data;
+}
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from "./Chats.module.scss"
 import ChatItem from "./ChatItem/ChatItem";
 import {observer} from "mobx-react-lite";
 
@@ -12,7 +13,7 @@ const Chats = observer(({chats}) => {
     });
 
     return (
-        <div >
+        <div className={styles.users}>
             {chatsArray.map((chat, key) => <ChatItem key={key} id={idArray[key]} chat={chat}/>)}
         </div>
     );

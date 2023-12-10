@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "./NewChat.module.css"
+import styles from "./NewChat.module.css";
 import Modal from "../Modal/Modal";
 import NewChatWindow from "./NewChatWindow/NewChatWindow";
 
@@ -15,7 +15,7 @@ const NewChat = (props) => {
             <button className={styles.wrapper} onClick={() => setNewChatWindow(true)}>
                 {svgPlus}
             </button>
-            <Modal active={newChatWindow} setActive={setNewChatWindow}><NewChatWindow /></Modal>
+            <Modal active={newChatWindow} setActive={setNewChatWindow}><NewChatWindow setNewChatWindow={setNewChatWindow} /></Modal>
         </div>
     );
 };

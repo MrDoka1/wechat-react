@@ -47,7 +47,11 @@ export default class AuthorizationStorage {
     }
 
     _setAuthorization(authorization) {
-        this._authorization = (authorization);
+        this._authorization = authorization;
+    }
+
+    setFalseAuthorization() {
+        this._setAuthorization(false);
     }
 
     _setId(id) {

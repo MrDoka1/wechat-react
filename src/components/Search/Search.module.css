@@ -2,7 +2,6 @@
     background-color: #414149;
     /*background-color: #343142;*/
     padding: 10px;
-    margin: 0 15px 20px;
     border-radius: 10px;
     vertical-align: center;
     display: grid;
@@ -26,11 +25,5 @@ input:focus::-webkit-input-placeholder {
 
 input::-webkit-input-placeholder {
     color: #808080;
-}
-
-@media (max-width: 1200px) {
-    .wrapper {
-        margin: 0 5px 20px;
-    }
 }
 

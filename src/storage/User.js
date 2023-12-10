@@ -11,8 +11,8 @@ export class User {
     _privateProfile;
     _friend = null;
     _color;
-    _friendsIds;
-    _subscribersIds;
+    _friendsIds = [];
+    _subscribersIds = [];
 
 
     constructor(user) {
@@ -22,6 +22,12 @@ export class User {
 
             _friend: observable,
             setFriend: action,
+
+            _friendsIds: observable,
+            setFriendsIds: action,
+
+            _subscribersIds: observable,
+            setSubscribersIds: action,
 
         })
 
@@ -201,12 +207,24 @@ export class User {
         return this._friendsIds;
     }
 
+    setFriendsIds(list) {
+        let friends = [];
+        list.forEach(value => friends.push(value[1]));
+        this._friendsIds = friends;
+    }
+
     getQtyFriends() {
         return this._friendsIds.length;
     }
 
     get subscribersIds() {
         return this._subscribersIds;
+    }
+
+    setSubscribersIds(list) {
+        let subscribers = [];
+        list.forEach(value => subscribers.push(value[1]));
+        this._subscribersIds = subscribers;
     }
 
     getQtySubscribers() {

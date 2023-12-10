@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import styles from "./SendMessagePanel.module.css"
 import {Context} from "../../../../index";
+import {sendMessageAPI} from "../../../../ServerAPI/MessageAPI";
 
 let svgButton = (<svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9.11933 4.38421C6.32524 2.98547 3.22434 5.63695 4.17515 8.61184L5.26247 12.0138L4.18106 15.3845C3.22719 18.3576 6.32366 21.0124 9.11924 19.6182L18.0461 15.1663C20.6491 13.8682 20.6519 10.1575 18.0509 8.85543L9.11933 4.38421Z" fill="#fff"/>
@@ -68,10 +69,9 @@ const SendMessagePanel = ({chatId}) => {
             message = message.substring(0, message.length-1);
         }
         if (message !== "") {
-            console.log(chatId);
-            storage.addMessage(chatId, {id:tempId++, text:message, senderId:authorizationStorage.id, time: "2023-08-27T15:37:47.58976"})
+            storage.sendMessage(chatId, message);
+            setTimeout(() => setValue(""), 1);
         }
-        setTimeout(() => setValue(""), 1);
     }
 };
 

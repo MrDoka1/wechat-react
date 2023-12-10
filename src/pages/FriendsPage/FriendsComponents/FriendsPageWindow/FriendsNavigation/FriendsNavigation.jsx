@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import styles from "./FriendsNavigation.module.scss"
 import FriendsNavItem from "./FriendsNavItem";
 import {Context} from "../../../../../index";
+import {observer} from "mobx-react-lite";
 
-const FriendsNavigation = (props) => {
+const FriendsNavigation = observer((props) => {
     const {authorizationStorage, storage} = useContext(Context);
 
     if (!storage.hasUser(authorizationStorage.id)) {
@@ -26,6 +27,6 @@ const FriendsNavigation = (props) => {
 
         </div>
     );
-};
+});
 
 export default FriendsNavigation;

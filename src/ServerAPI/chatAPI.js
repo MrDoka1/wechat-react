@@ -24,3 +24,13 @@ export const getChatUsersAPI = async (chatId) => {
     const {data} = await $HOST.get("/chat/users", {params: {chatId: chatId}});
     return data;
 }
+
+export const createChatAPI = async (name, isPrivate, users) => {
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("isPrivate", isPrivate);
+    formData.append("ids", Array.from(users).toString());
+    formData.append("url", "");
+    const {data} = await $HOST.post("/chat", formData);
+    return data;
+}

@@ -1,0 +1,18 @@
+.wrapper {
+  width: 100%;
+  background-color: #312648;
+  margin-bottom: 2px;
+  border-radius: 5px;
+  padding: 3px;
+  display: grid;
+  grid-template-columns: 48px 1fr 50px;
+  font-family: Archivo, sans-serif;
+  box-sizing: border-box;
+}
+
+.name {
+  font-size: 22px;
+  color: white;
+  margin-left: 3px;
+  height: min-content;
+}

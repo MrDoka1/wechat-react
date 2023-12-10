@@ -5,16 +5,9 @@ import LoaderElement from "./LoadChat/LoaderElement";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import ChatBarLogic from "./ChatBarLogic/ChatBarLogic";
-import {io} from "socket.io-client";
 
 const CurrentChat = observer(({chatId}) => {
     const {storage} = useContext(Context);
-
-    const socket = io('http://localhost:8081');
-    socket.on('message', (message) => {
-        console.log(message);
-    });
-
     const [load, setLoad] = useState(true);
 
     useEffect(() => {

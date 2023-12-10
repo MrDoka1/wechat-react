@@ -4,13 +4,12 @@ import InputGroupModule from "../MathPage/InputGroupModule/InputGroupModule";
 import InputModule from "../MathPage/InputGroupModule/InputModule/InputModule";
 import Point from "./Point";
 
-const ExtrapolationPage = (props) => {
-    const [list, setList] = useState([{t:0, x:0, y:0, z:0}, {t:0, x:0, y:0, z:0}]);
+const InterpolationPage = (props) => {
+    const [list, setList] = useState([{t:0, x:0, y:0}, {t:0, x:0, y:0}]);
     const [update, setUpdate] = useState(false);
     const [extraTime, setExtraTime] = useState("");
-    const [extraX, setExtraX] = useState("");
-    const [extraY, setExtraY] = useState("");
-    const [extraZ, setExtraZ] = useState("");
+    const [interX, setInterX] = useState("");
+    const [interY, setInterY] = useState("");
 
     /*let l = [0,1,3]
     l.splice(2, 0, 2)
@@ -24,18 +23,34 @@ const ExtrapolationPage = (props) => {
 
     function calc() {
         let length = list.length;
-        console.log("mmm", length === 2)
-        if (length === 2) {
-            console.log(Number(extraTime))
-            setExtraX(list[0].x + (Number(extraTime)-list[0].t)/(list[1].t - list[0].t) * (list[1].x - list[0].x))
+
+// Функция для создания многочлена первой степени
+        function createLagrangePolynomial(x, xi, fi) {
+            var x_diff = x - xi;
+            return function(x) {
+                return fi / (x_diff * (xi - x)).toFixed(2);
+            };
         }
-        // x(t)
-        //Y(1)+ (x-x(1)/x(2)-x(1)) * (Y(2) – Y(1))
+
+// Массив данных для интерполяции
+        var data = [
+            {x: 1, y: 4},
+            {x: 2, y: -1},
+            {x: 3, y: 5}
+        ];
+
+// Создаем многочлен Лагранжа
+        var lagrangePolynomial = data.map(function(point) {
+            return createLagrangePolynomial(point.x, point.x, point.y);
+        });
+
+        console.log("Многочлен Лагранжа:", lagrangePolynomial);
+        console.log("Многочлен Лагранжа 1:", createLagrangePolynomial(data[0].x, data[0].x, data[0].y));
     }
 
     function add(index) {
         let newList = list;
-        newList.splice(index+1, 0, {t:0, x:0, y:0, z:0})
+        newList.splice(index+1, 0, {t:0, x:0, y:0})
         setList(newList);
         setUpdate(!update);
         list.map(value => console.log(value))
@@ -64,11 +79,6 @@ const ExtrapolationPage = (props) => {
         newList[index].y = value;
         setList(newList);
     }
-    function updateZ(index, value) {
-        let newList = list;
-        newList[index].z = value;
-        setList(newList);
-    }
 
     // ** Из-за неправильного рендеринга **
     if (update) {
@@ -76,17 +86,16 @@ const ExtrapolationPage = (props) => {
         return (
             <div className={`${styles.wrapper} ${styles.math}`}>
                 <div style={{display: "flex", flexWrap: "wrap"}}>
-                    {list.map((v, k) => <Point key={k} index={k} value={{t:0, x:0, y:0, z:0}}/>)}
+                    {list.map((v, k) => <Point key={k} index={k} value={{t:0, x:0, y:0}}/>)}
                 </div>
-                <InputGroupModule title="Экстраполяция">
+                <InputGroupModule title="Интерполяция">
                     <InputModule subtitle="t" value={extraTime} setValue={setExtraTime}></InputModule>
-                    <InputModule subtitle="x" value={extraX} disabled={true}></InputModule>
-                    <InputModule subtitle="y" value={extraY} disabled={true}></InputModule>
-                    <InputModule subtitle="z" value={extraZ} disabled={true}></InputModule>
+                    <InputModule subtitle="x" value={interX} disabled={true}></InputModule>
+                    <InputModule subtitle="y" value={interY} disabled={true}></InputModule>
                     <div style={{height:"10px"}}></div>
                     <button className={styles.button} onClick={calc}>Обновить</button>
                 </InputGroupModule>
-        </div>)
+            </div>)
     }
     // ** --- **
 
@@ -96,13 +105,12 @@ const ExtrapolationPage = (props) => {
     return (
         <div className={`${styles.wrapper} ${styles.math}`}>
             <div style={{display: "flex", flexWrap: "wrap"}}>
-                {list.map((v, k) => <Point key={k} value={v} index={k} add={add} del={del} updateT={updateT} updateX={updateX} updateY={updateY} updateZ={updateZ} deletePoint={deletePoint}/>)}
+                {list.map((v, k) => <Point key={k} value={v} index={k} add={add} del={del} updateT={updateT} updateX={updateX} updateY={updateY} deletePoint={deletePoint}/>)}
             </div>
-            <InputGroupModule title="Экстраполяция">
+            <InputGroupModule title="Интерполяция">
                 <InputModule subtitle="t" value={extraTime} setValue={setExtraTime}></InputModule>
-                <InputModule subtitle="x" value={extraX} disabled={true}></InputModule>
-                <InputModule subtitle="y" value={extraY} disabled={true}></InputModule>
-                <InputModule subtitle="z" value={extraZ} disabled={true}></InputModule>
+                <InputModule subtitle="x" value={interX} disabled={true}></InputModule>
+                <InputModule subtitle="y" value={interY} disabled={true}></InputModule>
                 <div style={{height:"10px"}}></div>
                 <button className={styles.button} onClick={calc}>Обновить</button>
             </InputGroupModule>
@@ -110,4 +118,4 @@ const ExtrapolationPage = (props) => {
     );
 };
 
-export default ExtrapolationPage;
+export default InterpolationPage;

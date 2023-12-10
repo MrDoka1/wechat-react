@@ -21,21 +21,11 @@ const ChatBarLogic = observer(({chatId}) => {
     } else {
         let user = storage.getUser(chat.userId);
         name = <Link to={"/profile/" + chat.userId} className={styles.chatName}>{user.getName()}</Link>
-        if (user.lastOnline === "online") {
-            onlineString = "online";
+        onlineString = user.getLastOnlineString();
+        if (onlineString === "online") {
             statusActive = styles.active;
-        } else {
-            onlineString = lastOnline(user.lastOnline);
         }
     }
-
-    function lastOnline(lastOnline) {
-        let last = new Date(lastOnline);
-        let hours = last.getHours() < 10 ? "0" + last.getHours() : last.getHours();
-        let minutes = last.getMinutes() < 10 ? "0" + last.getMinutes() : last.getMinutes();
-        return `last online ${hours}:${minutes}`;
-    }
-
 
     return <ChatBar chatId={chatId} name={name} onlineString={onlineString} statusActive={statusActive} activeModal={activeModal} setActiveModal={setActiveModal} />;
 });

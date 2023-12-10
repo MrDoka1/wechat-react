@@ -9,7 +9,7 @@ const ChatItem = observer(({id, chat}) => {
 
     let to = "/chats/" + id;
 
-    let lastMessage = storage.getLastMessage(id);
+    let lastMessage = storage.getLastMessage(id.toString());
     lastMessage = lastMessage !== null ? lastMessage.text : "";
 
     if (id.toString().charAt(0) !== 'c') {
@@ -19,8 +19,10 @@ const ChatItem = observer(({id, chat}) => {
         return (
             <NavLink className={({ isActive}) => isActive ? `${styles.active}` : ""} to={to} end>
                 <div className={styles.wrapper}>
-                    <div className={styles.avatar} style={{backgroundColor: user.color}}><p>{avatarText}</p></div>
-                    <img className={styles.img} src={user.urlPhoto}  alt=""/>
+                    <div className={styles.avatarWrapper}>
+                        <div className={styles.avatar} style={{backgroundColor: user.color}}><p>{avatarText}</p></div>
+                        <img className={styles.img} src={user.urlPhoto}  alt=""/>
+                    </div>
                     <div className={styles.chatInfo}>
                         <div className={styles.chatName}>{user.getName()}</div>
                         <p className={styles.lastMessage}>{lastMessage}</p>
@@ -34,8 +36,10 @@ const ChatItem = observer(({id, chat}) => {
     return (
         <NavLink className={({ isActive}) => isActive ? `${styles.active}` : ""} to={to} end>
             <div className={styles.wrapper}>
-                <div className={styles.avatar}><p>{chat.name.charAt(0)}</p></div>
-                <img className={styles.img} src={chat.urlPhoto}  alt=""/>
+                <div className={styles.avatarWrapper}>
+                    <div className={styles.avatar}><p>{chat.name.charAt(0)}</p></div>
+                    <img className={styles.img} src={chat.urlPhoto}  alt=""/>
+                </div>
                 <div className={styles.chatInfo}>
                     <div className={styles.chatName}>{chat.name}</div>
                     <p className={styles.lastMessage}>{lastMessage}</p>

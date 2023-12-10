@@ -17,6 +17,9 @@ import MathPage from "./pages/MathPage/MathPage";
 import TwoPage from "./pages/TwoPage/TwoPage";
 import ExtrapolationPage from "./pages/ExtrapolationPage/ExtrapolationPage";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import IterationPage from "./pages/IterationPage/IterationPage";
+import InterpolationPage from "./pages/InterpolationPage/InterpolationPage";
+import Socket from "./components/Socket/Socket";
 
 const App = observer((props) => {
     const {authorizationStorage} = useContext(Context);
@@ -30,14 +33,31 @@ const App = observer((props) => {
                     <Route path="/math" element={<MathPage />}/>
                     <Route path="/two" element={<TwoPage />}/>
                     <Route path="/extra" element={<ExtrapolationPage />}/>
+                    <Route path="/iter" element={<IterationPage />}/>
+                    <Route path="/inter" element={<InterpolationPage />}/>
                     <Route path="*" element={<PreloadPage />} />
                 </Routes>
             </div>
         )
     } else if (authorizationStorage.authorization) {
-        storage.searchUsers(authorizationStorage.id);
+        storage.id = authorizationStorage.id;
+        if (!storage.hasUser(authorizationStorage.id)) {
+            storage.searchUsers(authorizationStorage.id);
+            return (
+                <div>
+                    <Routes>
+                        <Route path="/arta" element={<ArtaPage />}/>
+                        <Route path="/math" element={<MathPage />}/>
+                        <Route path="/two" element={<TwoPage />}/>
+                        <Route path="/extra" element={<ExtrapolationPage />}/>
+                        <Route path="*" element={<PreloadPage />} />
+                    </Routes>
+                </div>
+            )
+        }
         return (
             <div>
+                <Socket/>
                 <Routes>
                     <Route path="/profile/:id" element={<ProfilePage />}/>
                     <Route path="/chats/:id?" element={<ChatsPage />}/>

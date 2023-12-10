@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./InputModule.module.css"
+import styles from "./InputModule.module.scss"
 
 const InputModule = ({value, setValue, type = "number", title, subtitle, select, disabled=false}) => {
     if (type === "select") {

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
-import styles from "./ChatsPage.module.css";
+import styles from "./ChatsPage.module.scss";
 import Chats from "../../components/Chats/Chats";
 import CurrentChat from "../../components/CurrentChat/CurrentChat";
 import Search from "../../components/Search/Search";
@@ -60,7 +60,7 @@ const ChatsPage = observer((props) => {
                 <div className={styles.wrapper}>
                     <div>
                         <div className={styles.topBar}>
-                            <Search search={search} setSearch={setSearch} />
+                            <Search className={styles.search} search={search} setSearch={setSearch} />
                             <NewChat />
                         </div>
                         <LoaderElement />
@@ -101,7 +101,7 @@ const ChatsPage = observer((props) => {
                     <div className={styles.wrapper}>
                         <div>
                             <div className={styles.topBar}>
-                                <Search search={search} setSearch={setSearch} />
+                                <Search className={styles.search} search={search} setSearch={setSearch} />
                                 <NewChat />
                             </div>
                             <Chats chats={searchChats} />
@@ -119,7 +119,7 @@ const ChatsPage = observer((props) => {
             <div className={styles.wrapper}>
                 <div>
                     <div className={styles.topBar}>
-                        <Search search={search} setSearch={setSearch} />
+                        <Search className={styles.search} search={search} setSearch={setSearch} />
                         <NewChat />
                     </div>
                     <Chats chats={searchChats} />

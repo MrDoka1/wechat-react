@@ -18,7 +18,7 @@ const ChatUserLogic = observer(({setActiveModal, activeModal, chatId}) => {
         chatUsers.forEach((chatUser, key) => users.push(storage.getUser(chatUser.id)));
     }
 
-    users = users.concat(users).concat(users).concat(users).concat(users)
+    //users = users.concat(users).concat(users).concat(users).concat(users)
 
     return (
         <ChatUsers setActiveModal={setActiveModal} chatId={chatId} chatUsers={chatUsers} users={users} />

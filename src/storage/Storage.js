@@ -1,16 +1,28 @@
-import {action, makeObservable, observable} from "mobx";
-import {getChatsAPI, getChatUsersAPI, getLastMessagesAPI, getMessagesAPI} from "../ServerAPI/chatAPI";
-import {friendAPI, getUserAPI, getUsersAPI, getUsersOnlineAPI} from "../ServerAPI/userAPI";
+import {action, makeAutoObservable, observable} from "mobx";
+import {createChatAPI, getChatsAPI, getChatUsersAPI, getLastMessagesAPI, getMessagesAPI} from "../ServerAPI/chatAPI";
+import {
+    friendAPI,
+    getMyFriendsListAPI,
+    getMySubscribersListAPI,
+    getSearchUsersAPI,
+    getUserAPI,
+    getUsersAPI,
+    getUsersOnlineAPI
+} from "../ServerAPI/userAPI";
 import {User} from "./User";
 import Chat from "./Chat";
 import ChatUser from "./ChatUser";
+import {sendMessageAPI} from "../ServerAPI/MessageAPI";
 
 class Storage {
+    id = null;
     _chats = new Map();
     _chatMessages = new Map();
     _users = new Map();
+    _searchUsers = [];
+    _topicsList = [];
     constructor() {
-        makeObservable(this, {
+        makeAutoObservable(this, {
             _chats: observable,
             _setChat: action,
 
@@ -21,6 +33,12 @@ class Storage {
             _users: observable,
             _setUser: action,
             _setUnknownUser: action,
+
+            _searchUsers: observable,
+            _setSearchUsers: action,
+
+            _topicsList: observable,
+            _setTopicsList: action,
         })
         /*this._chats = new Map([
             ["c1", {id: 1, isDialog: false, img:"https://avatars.mds.yandex.net/i?id=3d8fe1cbef738979cb1dd23253789385baeba740-9657256-images-thumbs&n=13", name: "Котики", members: 46, online: 45}],
@@ -85,6 +103,7 @@ class Storage {
                 console.log(this.hasUser(userId))
             })
         }
+        this._setTopicsList();
     }
 
     getChat(id) {
@@ -95,20 +114,22 @@ class Storage {
         return this._chats;
     }
 
-    _setChat(chat) {
+    _setChat(chat, update=true) {
+        console.log(chat)
         if (chat.chat === null) {
             this._chats.set(chat.id, chat.dialog);
 
         } else {
             this._chats.set("c" + chat.id, new Chat(chat.chat, this));
         }
-        console.log(this._chats)
+        if (update) this._setTopicsList();
     }
 
     _setChats(chats) {
         chats.forEach(array => {
-            this._setChat(array[1]);
+            this._setChat(array[1], false);
         })
+        this._setTopicsList();
     }
 
     isDialog(id) {
@@ -122,6 +143,15 @@ class Storage {
 
     hasChat(chatId) {
         return this._chats.has(chatId);
+    }
+
+    createChat(name, isPrivate, usersIds, resetFunction) {
+        createChatAPI(name, isPrivate, usersIds).then(data => {
+            resetFunction();
+            this._setChat(data);
+            this._setMessage("c" + data.id, null);
+            this._setTopicsList();
+        })
     }
 /* -------------------------------------------------- */
 
@@ -139,14 +169,12 @@ class Storage {
     }
 
     _setMessages(id, messages) {
-        console.log(messages)
-        if (messages === []) {
+        if (!this._chatMessages.has(id)) {
             this._chatMessages.set(id, new Map());
         } else {
             messages.forEach(message => this._setMessage(id, message[1]));
             return true
         }
-        console.log(this._chatMessages)
     }
 
     _setMessage(chatId, message) {
@@ -234,6 +262,10 @@ class Storage {
             })
         }
     }
+
+    sendMessage(chatId, message) {
+        sendMessageAPI(chatId, message).then().catch(e=>console.log(e));
+    }
 /* -------------------------------------------------- */
 
 /* --------------------- Users --------------------- */
@@ -246,9 +278,13 @@ class Storage {
     }
 
     getUsers(ids) {
-        console.log()
         let list = [];
-        ids.forEach(userId => list.push(this.getUser(userId)));
+        ids.forEach(userId => {
+            let user = this.getUser(userId);
+            if (user !== undefined) {
+                list.push(user);   
+            }
+        });
         return list;
     }
 
@@ -268,15 +304,21 @@ class Storage {
         return updateList.concat(searchList);
     }
 
+    getProfile(userId) {
+        this.searchUsers([userId]).then();
+    }
+
     async updateOnline(ids) {
-        try {
-            const data = await getUsersOnlineAPI(ids);
-            Object.entries(data).forEach(value => {
-                this.getUser(Number(value[0])).setLastOnline(value[1]);
-            })
-            return this.getUsers(ids);
-        } catch (e) {
-            console.log(e)
+        if (ids.length !== 0) {
+            try {
+                const data = await getUsersOnlineAPI(ids);
+                Object.entries(data).forEach(value => {
+                    this.getUser(Number(value[0])).setLastOnline(value[1]);
+                })
+                return this.getUsers(ids);
+            } catch (e) {
+                console.log(e)
+            }
         }
         return [];
     }
@@ -285,12 +327,14 @@ class Storage {
         if (typeof ids === "number") {
             ids = [ids];
         }
-        try {
-            const data = await getUsersAPI(ids);
-            this._setUsers(Object.entries(data));
-            return this.getUsers(ids);
-        } catch (e) {
-            console.log(e)
+        if (ids.length !== 0) {
+            try {
+                const data = await getUsersAPI(ids);
+                this._setUsers(Object.entries(data));
+                return this.getUsers(ids);
+            } catch (e) {
+                console.log(e)
+            }
         }
         return [];
         /*getUsersAPI(ids).then(data => {
@@ -355,7 +399,53 @@ class Storage {
             user.setFriend(data);
         } else console.log("error")
     }
+
+    async updateMyFriends(user) {
+        const data = await getMyFriendsListAPI();
+        user.setFriendsIds(Object.entries(data));
+    }
+
+    async updateMySubscribers(user) {
+        const data = await getMySubscribersListAPI();
+        user.setSubscribersIds(Object.entries(data));
+    }
 /* -------------------------------------------------- */
+/* ------------------- SearchUsers ------------------- */
+    getSearchUsers() {
+        this.getAndUpdateUsers(this._searchUsers)
+        return this.getUsers(this._searchUsers);
+    }
+    updateSearchUsers() {
+        getSearchUsersAPI().then(data => {
+            this._setSearchUsers(Object.entries(data));
+        })
+    }
+
+    _setSearchUsers(list) {
+        let ids = [];
+        list.forEach(value => ids.push(value[1]));
+        this._searchUsers = ids;
+    }
+/* -------------------------------------------------- */
+
+
+    getTopicsList() {
+        return this._topicsList;
+    }
+
+    _setTopicsList() {
+        let newList = [];
+        this._chats.forEach((v, k) => {
+            if (typeof k !== "number") {
+                newList.push("/topic/chat/" + k);
+            } else {
+                newList.push("/topic/dialog/" + Math.min(this.id, k) + "_" + Math.max(this.id, k))
+            }
+        });
+        this._topicsList = newList;
+        console.log(newList, this._topicsList)
+    }
+
 }
 
 export default Storage;

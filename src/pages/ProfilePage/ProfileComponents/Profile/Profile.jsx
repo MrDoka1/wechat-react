@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from "./Profile.module.scss"
 import NavBar from "../../../../components/NavBar/NavBar";
 import {Context} from "../../../../index";
@@ -9,6 +9,10 @@ import {Link} from "react-router-dom";
 
 const Profile = observer(({id}) => {
     const {authorizationStorage, storage} = useContext(Context);
+
+    useEffect(()=>{
+        storage.getProfile(id);
+    },[]);
 
     let user = storage.getUser(id);
     let name = user.getName();
@@ -33,8 +37,8 @@ const Profile = observer(({id}) => {
                 friendButton = "Отменить заявку";
                 break;
             case "HE_SUBSCRIBER":
-                friendAction = () => console.log("answer");
-                friendButton = "Ответить на заявку";
+                friendAction = () => storage.addFriend(id);
+                friendButton = "Принять в друзья";
                 break;
             default:
         }

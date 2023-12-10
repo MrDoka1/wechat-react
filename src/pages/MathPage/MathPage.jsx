@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from "../ArtaPage/ArtaPage.module.scss";
 import InputGroupModule from "./InputGroupModule/InputGroupModule";
 import InputModule from "./InputGroupModule/InputModule/InputModule";
-import moduleStyles from "./InputGroupModule/InputModule/InputModule.module.css";
+import moduleStyles from "./InputGroupModule/InputModule/InputModule.module.scss";
 import Result from "../ArtaPage/ResultPanel/Result/Result";
 
 const MathPage = (props) => {

@@ -1,0 +1,29 @@
+.wrapper {
+    background-color: #1e1b2e;
+    border-radius: 20px;
+    padding: 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.content {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr 40px;
+    justify-content: end;
+}
+
+.logout {
+    background-color: #f00;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    min-width: 20vw;
+    text-align: center;
+    transition: 0.3s all;
+
+    &:hover {
+        background-color: #ff4b4b;
+    }
+}
