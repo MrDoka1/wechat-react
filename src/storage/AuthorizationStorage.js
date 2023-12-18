@@ -11,7 +11,7 @@ export default class AuthorizationStorage {
             _setAuthorization: action,
             _setId: action,
         })
-        this.updateAuthorization("");
+         this.updateAuthorization("").then();
     }
 
     async updateAuthorization(path) {

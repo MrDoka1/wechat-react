@@ -7,45 +7,53 @@ import Point from "./Point";
 const InterpolationPage = (props) => {
     const [list, setList] = useState([{t:0, x:0, y:0}, {t:0, x:0, y:0}]);
     const [update, setUpdate] = useState(false);
-    const [extraTime, setExtraTime] = useState("");
+    const [iterTime, setIterTime] = useState("");
     const [interX, setInterX] = useState("");
     const [interY, setInterY] = useState("");
-
-    /*let l = [0,1,3]
-    l.splice(2, 0, 2)
-    console.log(l)*/
 
     console.log(list)
 
     useMemo(()=> {
         calc();
-    }, [extraTime, list]);
+    }, [iterTime, list]);
 
     function calc() {
         let length = list.length;
+        let coefficients = lagrange(list);
+        console.log(coefficients)
+        let answerX = 0;
+        for (let i = 0; i < coefficients.length; i++) {
+            answerX += coefficients[i] * Math.pow(Number(iterTime), ++i);
+        }
+        setInterX(answerX);
+    }
 
-// Функция для создания многочлена первой степени
-        function createLagrangePolynomial(x, xi, fi) {
-            var x_diff = x - xi;
-            return function(x) {
-                return fi / (x_diff * (xi - x)).toFixed(2);
-            };
+    function lagrange(points) {
+        // Определим степень многочлена
+        const n = points.length - 1;
+
+        // Создадим массив коэффициентов многочлена
+        /*const coefficients = [];
+        for (let i = 0; i <= n; i++) {
+            coefficients[i] = 1;
+        }*/
+        const coefficients = new Array(n + 1).fill(1);
+
+        // Пройдемся по всем точкам
+        for (let i = 1; i <= n; i++) {
+            // Для каждой точки определим произведение
+            for (let j = 0; j < i; j++) {
+                coefficients[i] *= (points[i].x - points[j].x);
+            }
+
+            // Для каждой точки определим множитель
+            for (let j = i + 1; j <= n; j++) {
+                coefficients[j] *= (points[j].x - points[i].x);
+            }
         }
 
-// Массив данных для интерполяции
-        var data = [
-            {x: 1, y: 4},
-            {x: 2, y: -1},
-            {x: 3, y: 5}
-        ];
-
-// Создаем многочлен Лагранжа
-        var lagrangePolynomial = data.map(function(point) {
-            return createLagrangePolynomial(point.x, point.x, point.y);
-        });
-
-        console.log("Многочлен Лагранжа:", lagrangePolynomial);
-        console.log("Многочлен Лагранжа 1:", createLagrangePolynomial(data[0].x, data[0].x, data[0].y));
+        // Вернем массив коэффициентов
+        return coefficients;
     }
 
     function add(index) {
@@ -89,7 +97,7 @@ const InterpolationPage = (props) => {
                     {list.map((v, k) => <Point key={k} index={k} value={{t:0, x:0, y:0}}/>)}
                 </div>
                 <InputGroupModule title="Интерполяция">
-                    <InputModule subtitle="t" value={extraTime} setValue={setExtraTime}></InputModule>
+                    <InputModule subtitle="t" value={iterTime} setValue={setIterTime}></InputModule>
                     <InputModule subtitle="x" value={interX} disabled={true}></InputModule>
                     <InputModule subtitle="y" value={interY} disabled={true}></InputModule>
                     <div style={{height:"10px"}}></div>
@@ -108,7 +116,7 @@ const InterpolationPage = (props) => {
                 {list.map((v, k) => <Point key={k} value={v} index={k} add={add} del={del} updateT={updateT} updateX={updateX} updateY={updateY} deletePoint={deletePoint}/>)}
             </div>
             <InputGroupModule title="Интерполяция">
-                <InputModule subtitle="t" value={extraTime} setValue={setExtraTime}></InputModule>
+                <InputModule subtitle="t" value={iterTime} setValue={setIterTime}></InputModule>
                 <InputModule subtitle="x" value={interX} disabled={true}></InputModule>
                 <InputModule subtitle="y" value={interY} disabled={true}></InputModule>
                 <div style={{height:"10px"}}></div>

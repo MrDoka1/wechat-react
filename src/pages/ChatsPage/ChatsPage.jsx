@@ -31,6 +31,8 @@ const ChatsPage = observer((props) => {
         if (firstLoad) {
             firstLoad = false;
             storage.updateChats(setCheck);
+        } else {
+            storage.updateChats(setCheck);
         }
     }, [storage, setCheck]);
 

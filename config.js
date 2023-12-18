@@ -1,0 +1,1 @@
+export const BACKEND_SERVER_HOST = "http://localhost:8081";

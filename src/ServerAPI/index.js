@@ -1,7 +1,9 @@
 import axios from "axios";
+import {BACKEND_SERVER_HOST} from "../../config";
 
 export const $HOST = axios.create({
-    baseURL: "http://localhost:8081",
+    baseURL: BACKEND_SERVER_HOST,
+    //baseURL: "http://localhost:8081",
     //baseURL: "http://192.168.1.69:8081",
     //baseURL: "http://192.168.169.227:8081",
     //baseURL: "http://192.168.33.209:8081",
@@ -10,9 +12,9 @@ export const $HOST = axios.create({
     withCredentials: true,
 })
 
-export const $AUTH_HOST = axios.create({
+/*export const $AUTH_HOST = axios.create({
     baseURL: "http://localhost:8081"
-})
+})*/
 
 // const authInterceptor = config => {
 //     config.headers.authorization = `Bearer ${}`
